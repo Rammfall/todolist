@@ -1,0 +1,42 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "ToDo list for courses Ruby Garage",
+  "main": "server.js",
+  "scripts": {
+    "lint:js": "eslint ./client --color --format stylish --fix",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rammfall/todolist.git"
+  },
+  "author": "Bohdan Onatsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rammfall/todolist/issues"
+  },
+  "homepage": "https://github.com/rammfall/todolist#readme",
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mysql": "*",
+    "mysql2": "*",
+    "sequelize": "*",
+    "nodemon": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0"
+  },
+  "eslintIgnore": ["node_modules"]
+}

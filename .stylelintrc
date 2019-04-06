@@ -1,0 +1,7 @@
+{
+  "syntax": "css",
+  "extends": "stylelint-config-standard",
+  "rules": {
+
+  }
+}
