@@ -7,16 +7,16 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const Users = require('./routes/Users');
 
-app.use('./users/', Users);
+app.use('./users', Users);
 
 app.listen(port, () => {
   /* eslint-disable no-console */
 
-  console.log('Server is running on port: ', port);
+  console.log(`Server is running on port: ${port}`);
 
   /* eslint-enable no-console */
 });
