@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const Users = require('./routes/Users');
 
-app.use('./users', Users);
+app.use('/users', Users);
 
 app.listen(port, () => {
   /* eslint-disable no-console */

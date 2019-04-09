@@ -26,4 +26,7 @@ module.exports = db.sequelize.define(
       defaultValue: Sequelize.NOW,
     },
   },
+  {
+    timestamps: false,
+  },
 );
