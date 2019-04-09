@@ -20,7 +20,7 @@ users.post('/register', (req, res) => {
     created: today,
   };
 
-  users.findOne({
+  User.findOne({
     where: {
       email: req.body.email,
     },

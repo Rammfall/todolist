@@ -18,15 +18,15 @@
   },
   "homepage": "https://github.com/rammfall/todolist#readme",
   "dependencies": {
-    "bcrypt": "*",
-    "body-parser": "*",
-    "cors": "*",
-    "express": "*",
-    "jsonwebtoken": "*",
-    "mysql": "*",
-    "mysql2": "*",
-    "sequelize": "*",
-    "nodemon": "*"
+    "bcrypt": "3.0.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.2.12",
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -38,5 +38,7 @@
     "stylelint": "^9.10.1",
     "stylelint-config-standard": "^18.2.0"
   },
-  "eslintIgnore": ["node_modules"]
+  "eslintIgnore": [
+    "node_modules"
+  ]
 }
