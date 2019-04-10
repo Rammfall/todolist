@@ -53,7 +53,20 @@ class Navbar extends Component {
 
           </span>
         </button>
+
+        <div id="navbar1">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+            </li>
+          </ul>
+          {localStorage.usertoken ? userLink : loginRegLink}
+        </div>
       </nav>
     );
   }
 }
+
+export default withRouter(Navbar);
