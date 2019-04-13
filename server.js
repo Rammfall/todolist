@@ -10,8 +10,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const Users = require('./routes/Users');
+const Projects = require('./routes/Projects');
+const Tasks = require('./routes/Tasks');
 
 app.use('/users', Users);
+app.use('/projects', Projects);
+app.use('/tasks', Tasks);
 
 app.listen(port, () => {
   /* eslint-disable no-console */
