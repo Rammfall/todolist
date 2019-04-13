@@ -14,5 +14,6 @@ React and axios, builder - WebPack
 SELECT * FROM tasks;
 SELECT * FROM projects;
 
+SELECT DISTINCT status FROM tasks ORDER BY name ASC;
 
 ```
