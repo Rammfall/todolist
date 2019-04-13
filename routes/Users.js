@@ -3,6 +3,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('./../models/User');
+const Project = require('./../models/Project');
 
 const users = express.Router();
 
@@ -67,6 +68,21 @@ users.post('/login', (req, res) => {
     })
     .catch((error) => {
       res.status(400).json({ error });
+    });
+});
+
+users.post('/projects', (req, res) => {
+  const projectData = {
+    name: req.body.name,
+    user_id: req.body.user_id,
+  };
+
+  Project.create(projectData)
+    .then((projectResult) => {
+      res.json({ status: `Project ${projectResult.name} in DB!` });
+    })
+    .catch((error) => {
+      res.send(`Error: ${error}`);
     });
 });
 

@@ -25,7 +25,19 @@ class Profile extends Component {
 
   render() {
     return (
-
+      <div className="container">
+        <h1 className="title">Profile</h1>
+        <dl>
+          <dt>First name</dt>
+          <dd>{ this.state.first_name }</dd>
+          <dt>Last name</dt>
+          <dd>{ this.state.last_name }</dd>
+          <dt>email</dt>
+          <dd>{ this.state.email }</dd>
+        </dl>
+      </div>
     );
   }
 }
+
+export default Profile;
