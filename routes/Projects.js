@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const User = require('./../models/User');
 const Project = require('./../models/Project');
+const checkToken = require('./../middleware/check-auth');
 
 const projects = express.Router();
 
@@ -9,7 +10,7 @@ projects.use(cors());
 
 // New project
 
-projects.post('/put', (req, res) => {
+projects.post('/put', checkToken, (req, res) => {
   const projectData = {
     name: req.body.name,
     user_id: req.body.user_id,
@@ -40,7 +41,7 @@ projects.post('/put', (req, res) => {
 
 // Update project
 
-projects.post('/update', (req, res) => {
+projects.post('/update', checkToken, (req, res) => {
   const projectData = {
     name: req.body.name,
   };
@@ -68,7 +69,7 @@ projects.post('/update', (req, res) => {
 
 // Delete project
 
-projects.delete('/delete', (req, res) => {
+projects.delete('/delete', checkToken, (req, res) => {
   Project.destroy({
     where: {
       id: req.body.id,
@@ -84,7 +85,7 @@ projects.delete('/delete', (req, res) => {
 
 // Get list projects
 
-projects.post('/get', (req, res) => {
+projects.post('/get', checkToken, (req, res) => {
   Project.findAll({
     attributes: {
       exclude: ['user_id'],
