@@ -3,6 +3,7 @@ const cors = require('cors');
 const Task = require('./../models/Task');
 const Project = require('./../models/Project');
 const checkToken = require('./../middleware/check-auth');
+const validator = require('./../middleware/validation');
 
 const tasks = express.Router();
 
@@ -10,7 +11,7 @@ tasks.use(cors());
 
 // New task
 
-tasks.post('/put', checkToken, (req, res) => {
+tasks.post('/put', checkToken, validator, (req, res) => {
   const taskData = {
     name: req.body.name,
     status: 0,
@@ -43,7 +44,7 @@ tasks.post('/put', checkToken, (req, res) => {
 
 // Update task
 
-tasks.post('/update', checkToken, (req, res) => {
+tasks.post('/update', checkToken, validator, (req, res) => {
   const taskData = {
     name: req.body.name,
     status: req.body.status,
@@ -73,7 +74,7 @@ tasks.post('/update', checkToken, (req, res) => {
 
 // Delete task
 
-tasks.delete('/delete', checkToken, (req, res) => {
+tasks.delete('/delete', checkToken, validator, (req, res) => {
   Task.destroy({
     where: {
       id: req.body.id,
@@ -89,7 +90,7 @@ tasks.delete('/delete', checkToken, (req, res) => {
 
 // Get task list
 
-tasks.post('/get', checkToken, (req, res) => {
+tasks.post('/get', checkToken, validator, (req, res) => {
   Task.findAll({
     attributes: {
       exclude: ['project_id'],

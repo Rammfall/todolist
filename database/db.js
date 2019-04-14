@@ -5,7 +5,6 @@ const db = {};
 const sequelize = new Sequelize('nodejs_base', 'root2', '1', {
   host: 'localhost',
   dialect: 'mysql',
-  operatorsAliases: false,
 
   pool: {
     max: 5,
