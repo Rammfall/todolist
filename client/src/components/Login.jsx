@@ -28,7 +28,9 @@ class Login extends Component {
 
     login(user)
       .then((res) => {
-        if (res) {
+        console.log(res);
+        if (res.status !== 'error') {
+          localStorage.usertoken = res.token;
           this.props.history.push(`/profile`);
         }
       });

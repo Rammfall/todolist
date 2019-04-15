@@ -59,9 +59,9 @@ users.post('/login', validator, (req, res) => {
             expiresIn: 1440,
           });
 
-          res.send(token);
+          res.json({ status: 'success', token });
         } else {
-          res.json({ status: 'Wrong password' });
+          res.json({ status: 'wrong', info: 'Wrong password' });
         }
       } else {
         res.status(400).json({ error: 'User does not exist' });

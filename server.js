@@ -15,12 +15,11 @@ const Users = require('./routes/Users');
 const Projects = require('./routes/Projects');
 const Tasks = require('./routes/Tasks');
 
-// Render static html
+// Render static files
 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/client/public/index.html`));
+  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
 });
-
 
 // Defining all routes
 
@@ -28,6 +27,7 @@ app.use('/users', Users);
 app.use('/projects', Projects);
 app.use('/tasks', Tasks);
 app.use('/', router);
+app.use('/', express.static('./client/build/'));
 
 app.listen(port, () => {
   /* eslint-disable no-console */

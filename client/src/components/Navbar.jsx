@@ -33,9 +33,9 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav__item">
-          <a href="/" onClick={this.logOut.bind(this)} className="nav__link">
-            Logout
-          </a>
+          <Link to="/" onClick={this.logOut.bind(this)} className="nav__link">
+            Logouts
+          </Link>
         </li>
       </ul>
     );

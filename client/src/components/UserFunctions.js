@@ -1,30 +1,30 @@
-import axios from 'axios';
+import axios from 'axios'
 
-export const register = (newUser) => {
+export const register = newUser => {
   return axios
     .post('users/register', {
       first_name: newUser.first_name,
       last_name: newUser.last_name,
       email: newUser.email,
-      password: newUser.password,
+      password: newUser.password
     })
-    .then((res) => {
-      console.log('Registred');
-    });
-};
+    .then(res => {
+      console.log("Registered")
+    })
+}
 
-export const login = (user) => {
+export const login = user => {
   return axios
     .post('users/login', {
       email: user.email,
-      password: user.password,
+      password: user.password
     })
-    .then((res) => {
-      localStorage.setItem('usertoken', res.data);
+    .then(res => {
+      localStorage.setItem('usertoken', res.data.token);
 
       return res.data;
     })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+    .catch(err => {
+      console.log(err);
+    })
+}
