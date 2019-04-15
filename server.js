@@ -27,6 +27,7 @@ app.use('/users', Users);
 app.use('/projects', Projects);
 app.use('/tasks', Tasks);
 app.use('/', router);
+app.use('/static', express.static('./client/build/static'));
 app.use('/', express.static('./client/build/'));
 
 app.listen(port, () => {
