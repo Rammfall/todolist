@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const User = require('./../models/User');
 const Project = require('./../models/Project');
 const checkToken = require('./../middleware/check-auth');
 const validator = require('./../middleware/validation');
@@ -14,26 +13,15 @@ projects.use(cors());
 projects.post('/put', checkToken, validator, (req, res) => {
   const projectData = {
     name: req.body.name,
-    user_id: req.body.user_id,
+    user_id: req.userData.id,
   };
 
-  User.findOne({
-    where: {
-      id: req.body.user_id,
-    },
-  })
-    .then((user) => {
-      if (user) {
-        Project.create(projectData)
-          .then((projectResult) => {
-            res.json({ status: `Project ${projectResult.name} in DB!` });
-          })
-          .catch((error) => {
-            res.json({ error });
-          });
-      } else {
-        res.json({ error: 'User isn\'t exist' });
-      }
+  Project.create(projectData)
+    .then((projectResult) => {
+      res.json({
+        status: 'success',
+        info: `Project ${projectResult.name} in DB!`,
+      });
     })
     .catch((error) => {
       res.json({ error });
@@ -47,25 +35,16 @@ projects.post('/update', checkToken, validator, (req, res) => {
     name: req.body.name,
   };
 
-  Project.findOne({
+  Project.update(projectData, {
     where: {
       id: req.body.id,
+      user_id: req.userData.id,
     },
   })
-    .then((project) => {
-      if (project) {
-        Project.update(projectData, { where: { id: req.body.id } })
-          .then(() => {
-            res.json({ status: `Project ${req.body.id} was update with new name: ${req.body.name}` });
-          })
-          .catch(error => res.json({ error }));
-      } else {
-        res.json({ error: 'Project isn\' exist' });
-      }
+    .then(() => {
+      res.json({ status: `Project ${req.body.id} was update with new name: ${req.body.name}` });
     })
-    .catch((error) => {
-      res.json({ error });
-    });
+    .catch(error => res.json({ error }));
 });
 
 // Delete project
@@ -74,6 +53,7 @@ projects.delete('/delete', checkToken, validator, (req, res) => {
   Project.destroy({
     where: {
       id: req.body.id,
+      user_id: req.userData.id,
     },
   })
     .then(() => {
@@ -92,7 +72,7 @@ projects.post('/get', checkToken, validator, (req, res) => {
       exclude: ['user_id'],
     },
     where: {
-      user_id: req.body.user_id,
+      user_id: req.userData.id,
     },
   })
     .then((result) => {
