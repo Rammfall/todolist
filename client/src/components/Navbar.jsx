@@ -1,60 +1,62 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 class Navbar extends Component {
   logOut(e) {
     e.preventDefault();
-
     localStorage.removeItem('usertoken');
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   }
 
   render() {
     const loginRegLink = (
-      <ul className="nav">
-        <li className="nav__item">
-          <Link to="/login" className="nav__link">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link to="/login" className="nav-link">
             Login
           </Link>
         </li>
-        <li className="nav__item">
-          <Link to="/register" className="nav__link">
+        <li className="nav-item">
+          <Link to="/register" className="nav-link">
             Register
           </Link>
         </li>
       </ul>
     );
-
     const userLink = (
-      <ul className="nav">
-        <li className="nav__item">
-          <Link to="/profile" className="nav__link">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link to="/dashboard" className="nav-link">
+            Dashboard
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/profile" className="nav-link">
             User
           </Link>
         </li>
-        <li className="nav__item">
-          <Link to="/" onClick={this.logOut.bind(this)} className="nav__link">
-            Logouts
-          </Link>
+        <li className="nav-item">
+          <a href="/#" onClick={this.logOut.bind(this)} className="nav-link">
+            Logout
+          </a>
         </li>
       </ul>
     );
 
     return (
-      <nav>
-        <button className="nav__toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar1"
-        aria-controls="navbar1"
-        aria-expanded="false"
-        aria-label="toggle navigation">
-          <span className="nav__toggler-icon">
-
-          </span>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar1"
+                aria-controls="navbar1"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span className="navbar-toggle-icon"></span>
         </button>
 
-        <div id="navbar1">
+        <div className="collapse navbar-collapse justify-content-md-center"
+             id="navbar1">
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="/" className="nav-link">
@@ -65,8 +67,8 @@ class Navbar extends Component {
           {localStorage.usertoken ? userLink : loginRegLink}
         </div>
       </nav>
-    );
+    )
   }
 }
 
-export default withRouter(Navbar);
+export default withRouter(Navbar)

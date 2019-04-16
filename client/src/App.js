@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+// import PropTypes from 'prop-types';
 
-import Navbar from './components/Navbar'
-import Landing from './components/Landing'
-import Login from './components/Login'
-import Register from './components/Register'
-import Profile from './components/Profile'
+import Navbar from './components/Navbar.jsx'
+import Landing from './components/Landing.jsx'
+import Login from './components/Login.jsx'
+import Register from './components/Register.jsx'
+import Profile from './components/Profile.jsx'
 
 class App extends Component {
   render () {

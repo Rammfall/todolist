@@ -23,6 +23,6 @@ module.exports = (req, res, next) => {
   if (Object.keys(result).every(elem => result[elem].elem)) {
     next();
   } else {
-    res.json({ notValid: result });
+    res.json({ status: 'error', notValid: result });
   }
 };

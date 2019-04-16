@@ -61,10 +61,10 @@ users.post('/login', validator, (req, res) => {
 
           res.json({ status: 'success', token });
         } else {
-          res.json({ status: 'wrong', info: 'Wrong password' });
+          res.json({ status: 'error', info: 'Wrong password' });
         }
       } else {
-        res.status(400).json({ error: 'User does not exist' });
+        res.json({ status: 'error', info: 'User does not exist' });
       }
     })
     .catch((error) => {
