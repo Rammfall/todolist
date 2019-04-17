@@ -12,8 +12,8 @@ class Modal extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      name: nextProps.name,
-      id: nextProps.id,
+      name: nextProps.data.name,
+      id: nextProps.data.id,
     });
   }
 

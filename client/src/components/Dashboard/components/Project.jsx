@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Tasks from './Tasks.jsx';
-import Modal from './ProjectModal.jsx';
-import {dropProject} from "./UserFunctions";
+import Tasks from '../../Tasks.jsx';
+import Modal from '../../ProjectModal.jsx';
+import {dropProject} from "../../UserFunctions";
 
 class Project extends Component {
   constructor(props){
@@ -11,11 +11,12 @@ class Project extends Component {
       isAlive: true,
       id: this.props.data.id,
       requiredItem: 0,
+      data: this.props.data,
     };
 
-    //this.saveModalDetails = this.saveModalDetails.bind(this);
+    this.saveModalDetails = this.saveModalDetails.bind(this);
     this.clickDelete = this.clickDelete.bind(this);
-    // this.replaceModalItem = this.replaceModalItem.bind(this);
+    this.replaceModalItem = this.replaceModalItem.bind(this);
   }
 
   clickDelete() {
@@ -25,7 +26,20 @@ class Project extends Component {
         this.setState({isAlive: false});
       })
       .catch(error => console.log(error));
-  }
+  };
+
+  saveModalDetails(item) {
+    let data;
+    data = item;
+
+    this.setState({ data });
+  };
+
+  replaceModalItem(index) {
+    this.setState({
+      requiredItem: index
+    });
+  };
 
   render() {
     const { id, name } = this.props.data;
@@ -38,6 +52,7 @@ class Project extends Component {
           <button className="btn btn-outline-secondary">Edit project</button>
           <button className="btn btn-danger" onClick={this.clickDelete}>Delete project</button>
           <Tasks projectId={id}/>
+          <Modal data={{name, id}}/>
         </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Profile from './components/Profile.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 
 class App extends Component {
   render () {

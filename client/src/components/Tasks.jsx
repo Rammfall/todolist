@@ -21,7 +21,7 @@ class Tasks extends Component {
   onSubmit (e) {
     e.preventDefault();
 
-    putTask({project_id: `${this.state.projectId}`, name: this.state.newItem.name })
+    putTask({project_id: `${this.state.projectId}`, name: this.state.newItem.name, deadline: this.state.newItem.deadline })
       .then((res) => {
         const tasks = this.state.tasks || [];
         tasks.push(res.info);
@@ -36,6 +36,8 @@ class Tasks extends Component {
   onChange(e) {
     const name = e.target.name;
     const value = e.target.value;
+
+    console.log(this.state);
 
     this.setState({newItem: {
         [name]: value,
@@ -64,7 +66,7 @@ class Tasks extends Component {
   }
 
   render() {
-    const {isLoading, tasks, error} = this.state;
+    const {isLoading, tasks} = this.state;
 
     return (
       <div>
@@ -77,9 +79,11 @@ class Tasks extends Component {
           <p>Loading...</p>
         )}
         <form onSubmit={this.onSubmit}>
-          <div className="form-group" onSubmit={this.onSubmit}>
+          <div className="form-group">
             <input type="text" className="form-control" aria-describedby="emailHelp"
                    placeholder="Enter task name" name="name" onChange={this.onChange}/>
+            <input type="date" className="form-control" aria-describedby="emailHelp"
+                   placeholder="Enter task name" name="deadline" onChange={this.onChange}/>
           </div>
           <button type="submit" className="btn btn-primary">Add task</button>
         </form>

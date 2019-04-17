@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {getProjects, putProject} from "./UserFunctions";
-import Project from './Project.jsx';
+import {getProjects, putProject} from "../UserFunctions";
+import Project from './components/Project.jsx';
 
 class Dashboard extends Component {
   constructor(props) {

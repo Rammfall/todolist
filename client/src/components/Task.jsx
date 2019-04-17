@@ -22,7 +22,7 @@ class Task extends Component {
   }
 
   render() {
-    const {name, id, status, deadline, project_id} = this.state.data;
+    const {name, id, deadline} = this.state.data;
 
     return (
       this.state.isAlive ? (
