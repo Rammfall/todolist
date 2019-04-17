@@ -51,7 +51,7 @@ projects.post('/update', checkToken, validator, (req, res) => {
 
 // Delete project
 
-projects.delete('/delete', checkToken, validator, (req, res) => {
+projects.post('/delete', checkToken, validator, (req, res) => {
   Project.destroy({
     where: {
       id: req.body.id,

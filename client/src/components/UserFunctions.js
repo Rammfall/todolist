@@ -60,7 +60,13 @@ export const putProject = (data) => {
 };
 
 export const dropProject = (data) => {
-  return instance.delete('/projects/delete', data)
+  return instance.post('/projects/delete', data)
     .then(res => res)
     .catch(error => console.log(error));
+};
+
+export const getTasks = (data) => {
+  return instance.post('/tasks/get', data)
+    .then(res => res)
+    .catch(error => error);
 };

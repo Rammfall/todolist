@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Tasks from './Tasks.jsx';
 import {dropProject} from "./UserFunctions";
 
 class Project extends Component {
@@ -14,9 +15,9 @@ class Project extends Component {
   }
 
   clickHandler() {
-    dropProject({id: this.state.id})
-      .then((res) => {
-        console.log({id: this.state.id});
+    dropProject({id: `${this.state.id}`})
+      .then(() => {
+
         this.setState({isAlive: false});
       })
       .catch(error => console.log(error));
@@ -26,12 +27,13 @@ class Project extends Component {
     const { id, name } = this.props.data;
 
     return this.state.isAlive ? (
-      <div className=" col-md-6" data-id={id}>
+      <div className=" col-md-12" data-id={id}>
         <div className="card">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <button className="btn btn-outline-secondary">Edit project</button>
           <button className="btn btn-danger" onClick={this.clickHandler}>Delete project</button>
+          <Tasks projectId={id}/>
         </div>
         </div>
       </div>
