@@ -13,9 +13,9 @@ class Project extends Component {
       requiredItem: 0,
     };
 
-    this.saveModalDetails = this.saveModalDetails.bind(this);
+    //this.saveModalDetails = this.saveModalDetails.bind(this);
     this.clickDelete = this.clickDelete.bind(this);
-    this.replaceModalItem = this.replaceModalItem.bind(this);
+    // this.replaceModalItem = this.replaceModalItem.bind(this);
   }
 
   clickDelete() {
