@@ -70,3 +70,15 @@ export const getTasks = (data) => {
     .then(res => res)
     .catch(error => error);
 };
+
+export const putTask = (data) => {
+  return instance.post('/tasks/put', data)
+    .then(res => res.data)
+    .catch(error => authFail(error));
+};
+
+export const dropTask = (data) => {
+  return instance.post('/tasks/delete', data)
+    .then(res => res)
+    .catch(error => console.log(error));
+};

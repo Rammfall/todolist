@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tasks from './Tasks.jsx';
+import Modal from './ProjectModal.jsx';
 import {dropProject} from "./UserFunctions";
 
 class Project extends Component {
@@ -9,12 +10,15 @@ class Project extends Component {
     this.state = {
       isAlive: true,
       id: this.props.data.id,
+      requiredItem: 0,
     };
 
-    this.clickHandler = this.clickHandler.bind(this);
+    this.saveModalDetails = this.saveModalDetails.bind(this);
+    this.clickDelete = this.clickDelete.bind(this);
+    this.replaceModalItem = this.replaceModalItem.bind(this);
   }
 
-  clickHandler() {
+  clickDelete() {
     dropProject({id: `${this.state.id}`})
       .then(() => {
 
@@ -32,7 +36,7 @@ class Project extends Component {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <button className="btn btn-outline-secondary">Edit project</button>
-          <button className="btn btn-danger" onClick={this.clickHandler}>Delete project</button>
+          <button className="btn btn-danger" onClick={this.clickDelete}>Delete project</button>
           <Tasks projectId={id}/>
         </div>
         </div>

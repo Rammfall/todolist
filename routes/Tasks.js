@@ -29,7 +29,7 @@ tasks.post('/put', checkToken, validator, (req, res) => {
       if (project) {
         Task.create(taskData)
           .then((taskResult) => {
-            res.json({ status: `Task ${taskResult.name} added in DB!` });
+            res.json({ status: `Task ${taskResult.name} added in DB!`, info: taskResult });
           })
           .catch((error) => {
             res.send(`Error: ${error}`);
@@ -75,7 +75,7 @@ tasks.post('/update', checkToken, validator, (req, res) => {
 
 // Delete task
 
-tasks.delete('/delete', checkToken, validator, (req, res) => {
+tasks.post('/delete', checkToken, validator, (req, res) => {
   Task.destroy({
     where: {
       id: req.body.id,

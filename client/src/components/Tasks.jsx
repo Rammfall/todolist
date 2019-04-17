@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Task from './Task.jsx';
-import {getProjects, getTasks} from './UserFunctions'
+import { getTasks, putTask } from './UserFunctions';
 
 class Tasks extends Component {
   constructor(props) {
@@ -13,11 +13,38 @@ class Tasks extends Component {
       error: null,
       newItem: '',
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onSubmit (e) {
+    e.preventDefault();
+
+    putTask({project_id: `${this.state.projectId}`, name: this.state.newItem.name })
+      .then((res) => {
+        const tasks = this.state.tasks || [];
+        tasks.push(res.info);
+
+        this.setState({
+          tasks: tasks,
+        });
+      })
+      .catch(error => console.log(error));
+  }
+
+  onChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    this.setState({newItem: {
+        [name]: value,
+      }});
   }
 
   fetchTasks() {
     console.log(this.props.project_id);
-    getTasks({id: this.props.projectId})
+    getTasks({id: `${this.props.projectId}`})
       .then(data => {
         this.setState({
           tasks: data.data,
@@ -49,6 +76,13 @@ class Tasks extends Component {
         ) : (
           <p>Loading...</p>
         )}
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group" onSubmit={this.onSubmit}>
+            <input type="text" className="form-control" aria-describedby="emailHelp"
+                   placeholder="Enter task name" name="name" onChange={this.onChange}/>
+          </div>
+          <button type="submit" className="btn btn-primary">Add task</button>
+        </form>
       </div>
     );
   }
