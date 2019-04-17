@@ -22,6 +22,7 @@ tasks.post('/put', checkToken, validator, (req, res) => {
   Project.findOne({
     where: {
       id: req.body.project_id,
+      user_id: req.userData.id,
     },
   })
     .then((project) => {

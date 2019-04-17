@@ -21,6 +21,8 @@ projects.post('/put', checkToken, validator, (req, res) => {
       res.json({
         status: 'success',
         info: `Project ${projectResult.name} in DB!`,
+        name: projectResult.name,
+        id: projectResult.id,
       });
     })
     .catch((error) => {
@@ -60,7 +62,7 @@ projects.delete('/delete', checkToken, validator, (req, res) => {
       res.json(`Project with id ${req.body.id} deleted`);
     })
     .catch((error) => {
-      res.json({ error });
+      res.status(400).json({ error });
     });
 });
 
