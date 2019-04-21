@@ -1,0 +1,22 @@
+:root {
+  --themeColor: #fff;
+  --textColor: rgba(0, 0, 0, 0.7);
+  --headerShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+  --accentColor: rgba(255, 82, 82, 0.87);
+  --grey: #dadce0;
+  --black: rgba(0, 0, 0, 0.92);
+  --blue: #1a73e8;
+}
+
+html,
+body,
+#root {
+  color: var(--textColor);
+  height: 100%;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.container {
+  margin: auto;
+  width: 80%;
+}

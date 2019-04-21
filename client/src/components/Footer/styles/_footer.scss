@@ -1,0 +1,30 @@
+.footer {
+  box-shadow: var(--headerShadow);
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.logo-small {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.footer__year {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.footer__link {
+  flex-grow: 1;
+  text-align: right;
+  text-decoration: underline;
+  transition: all 0.3s;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

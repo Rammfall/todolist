@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {FormErrors} from './FormErrors.jsx';
-import {login} from './UserFunctions';
-import Modal from './Modal.jsx';
+import {FormErrors} from '../FormErrors.jsx';
+import {login} from '../UserFunctions';
+import Modal from '../Modal.jsx';
 
 
 class Login extends Component {
@@ -76,43 +76,19 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 mt-5 mx-auto">
-            <form noValidate onSubmit={this.onSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-              <div className="panel panel-default">
-                <FormErrors formErrors={this.state.formErrors}/>
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input type="email"
-                       className="form-control"
-                       name="email"
-                       placeholder="Enter Email"
-                       value={this.state.email}
-                       onChange={this.onChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password"
-                       className="form-control"
-                       name="password"
-                       placeholder="Enter Password"
-                       value={this.state.password}
-                       onChange={this.onChange}
-                />
-              </div>
-              <button type="submit"
-                      className="btn btn-lg btn-primary btn-block" disabled={!this.state.formValid}>
-                Sign in
-              </button>
-            </form>
-            <Modal/>
-          </div>
+      <form className="form" onSubmit={this.onSubmit}>
+        <h1 className="form__title">Log in</h1>
+        <p className="form__description">on ToDo list for Ruby Garage</p>
+        <div className="input" data-error="">
+          <input type="email" className="input__field" name="email" placeholder="Email" required onChange={this.onChange} />
+          <label className="input__label">Email</label>
         </div>
-      </div>
+        <div className="input">
+          <input type="password" className="input__field" name="password" placeholder="Password" required onChange={this.onChange} />
+          <label className="input__label">Password</label>
+        </div>
+        <button className="btn color-btn">Log in</button>
+      </form>
     )
   }
 }
