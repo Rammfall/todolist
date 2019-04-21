@@ -81,7 +81,7 @@ class Dashboard extends Component {
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <h3 className="projects__load-title load-animation">Loading</h3>
           )}
         </ul>
         <form className="form-project" onSubmit={this.onSubmit}>

@@ -1,5 +1,7 @@
-import React, {Component} from 'react'
-import jwt_decode from 'jwt-decode'
+import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode';
+
+import './styles/_profile.scss';
 
 class Profile extends Component {
   constructor(props) {
@@ -20,36 +22,24 @@ class Profile extends Component {
       first_name: decoded.first_name,
       last_name: decoded.last_name,
       email: decoded.email
-    })
+    });
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">PROFILE</h1>
-          </div>
-          <table className="table col-md-6 mx-auto">
-            <tbody>
-            <tr>
-              <td>First Name</td>
-              <td>{this.state.first_name}</td>
-            </tr>
-            <tr>
-              <td>Last Name</td>
-              <td>{this.state.last_name}</td>
-            </tr>
-            <tr>
-              <td>Email</td>
-              <td>{this.state.email}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+      <div className="profile">
+        <h1 className="title profile__title">Your Profile</h1>
+        <dl className="profile__list">
+          <dt className="profile__term">First name: </dt>
+          <dd className="profile__description">{this.state.first_name}</dd>
+          <dt className="profile__term">Last name: </dt>
+          <dd className="profile__description">{this.state.last_name}</dd>
+          <dt className="profile__term">Email: </dt>
+          <dd className="profile__description">{this.state.email}</dd>
+        </dl>
       </div>
     )
   }
 }
 
-export default Profile
+export default Profile;

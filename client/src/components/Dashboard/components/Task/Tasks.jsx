@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Task from './Task.jsx';
-import { getTasks, putTask } from '../../../UserFunctions';
+import {getTasks, putTask} from '../../../UserFunctions';
+import './styles/_tasks.scss';
 
 class Tasks extends Component {
   constructor(props) {
@@ -18,10 +19,14 @@ class Tasks extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onSubmit (e) {
+  onSubmit(e) {
     e.preventDefault();
 
-    putTask({project_id: `${this.state.projectId}`, name: this.state.newItem.name, deadline: this.state.newItem.deadline })
+    putTask({
+      project_id: `${this.state.projectId}`,
+      name: this.state.newItem.name,
+      deadline: this.state.newItem.deadline
+    })
       .then((res) => {
         const tasks = this.state.tasks || [];
         tasks.push(res.info);
@@ -39,9 +44,11 @@ class Tasks extends Component {
 
     console.log(this.state);
 
-    this.setState({newItem: {
+    this.setState({
+      newItem: {
         [name]: value,
-      }});
+      }
+    });
   }
 
   fetchTasks() {
@@ -69,23 +76,32 @@ class Tasks extends Component {
     const {isLoading, tasks} = this.state;
 
     return (
-      <div>
-        <h2>Tasks:</h2>
+      <div className="tasks">
+        <h3 className="tasks__title">Project tasks:</h3>
+        <ul className="tasks__list">
         {!isLoading && tasks !== undefined ? (
           tasks.map((item) => {
             return (<Task data={item} key={item.id}/>);
           })
         ) : (
-          <p>Loading...</p>
+          <p className="load-animation">Loading...</p>
         )}
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <input type="text" className="form-control" aria-describedby="emailHelp"
-                   placeholder="Enter task name" name="name" onChange={this.onChange}/>
-            <input type="date" className="form-control" aria-describedby="emailHelp"
-                   placeholder="Enter task name" name="deadline" onChange={this.onChange}/>
+        </ul>
+        <form className="tasks__form" onSubmit={this.onSubmit}>
+          <div className="form__group tasks__form-group">
+            <div className="input">
+              <input type="text" name="name" placeholder="Task name" className="input__field" onChange={this.onChange}
+                     required/>
+              <label className="input__label">Task name</label>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary">Add task</button>
+          <div className="form__group tasks__form-group">
+            <div className="input">
+              <input type="date" name="deadline" placeholder="Deadline task" className="input__field input__date" required/>
+              <label className="input__label">Task deadline</label>
+            </div>
+          </div>
+          <button type="submit" className="btn btn-color">Add task</button>
         </form>
       </div>
     );

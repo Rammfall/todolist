@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {register} from '../UserFunctions'
 
-// import Modal from './Modal.jsx';
-
 class Register extends Component {
   constructor(props) {
     super(props);

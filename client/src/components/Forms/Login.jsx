@@ -1,8 +1,5 @@
-import React, {Component} from 'react'
-import {FormErrors} from '../FormErrors.jsx';
+import React, {Component} from 'react';
 import {login} from '../UserFunctions';
-import Modal from '../Modal.jsx';
-
 
 class Login extends Component {
   constructor(props) {

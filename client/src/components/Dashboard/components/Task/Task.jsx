@@ -22,20 +22,16 @@ class Task extends Component {
   }
 
   render() {
-    const {name, id, deadline} = this.state.data;
+    const {name, deadline} = this.state.data;
 
     return (
       this.state.isAlive ? (
-      <div className="col-md-12" data-id={id}>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{name}</h5>
-            <h6 className="card-subtitle">{deadline}</h6>
-            <button className="btn btn-outline-secondary">Edit task</button>
-            <button className="btn btn-danger" onClick={this.clickDelete}>Delete task</button>
-          </div>
-        </div>
-      </div>
+      <li className="task">
+        <h4 className="task__title">{name}</h4>
+        <div className="task__date">{deadline}</div>
+        <button className="btn btn-color">Edit task</button>
+        <button className="btn btn-danger" onClick={this.clickDelete}>Delete task</button>
+      </li>
       ) : ''
     );
   }

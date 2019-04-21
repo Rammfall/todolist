@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Tasks from '../Task/Tasks.jsx';
 import {dropProject} from "../../../UserFunctions";
+
 import './styles/_project.scss';
 
 class Project extends Component {
@@ -45,14 +46,14 @@ class Project extends Component {
     const {id, name} = this.props.data;
 
     return this.state.isAlive ? (
-      <div className="project">
+      <li className="project">
         <div className="project__header">
           <h2 className="project__title">{name}</h2>
           <button className="btn">Edit project</button>
           <button className="btn btn-danger" onClick={this.clickDelete}>Delete project</button>
         </div>
         <Tasks projectId={id}/>
-      </div>
+      </li>
     ) : null;
   }
 }

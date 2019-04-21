@@ -1,0 +1,34 @@
+.tasks__title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.tasks__form {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.tasks__form-group {
+  width: 48%;
+}
+
+.task {
+  align-items: center;
+  box-shadow: var(--headerShadow);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.task__title {
+  width: 65%;
+}
+
+.task__date {
+  width: 10%;
+}

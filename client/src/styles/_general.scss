@@ -27,6 +27,12 @@ body,
   font-weight: 700;
 }
 
+.title-one {
+  color: var(--black);
+  font-size: 30px;
+  font-weight: 500;
+}
+
 .input {
   position: relative;
 
@@ -86,6 +92,11 @@ body,
     top: -5px;
     z-index: 1;
   }
+}
+
+.input__date {
+  padding-bottom: 13px;
+  padding-top: 13px;
 }
 
 .input__label {

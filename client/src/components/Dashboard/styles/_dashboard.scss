@@ -14,3 +14,40 @@
   margin: auto;
   width: 70%;
 }
+
+.projects__load-title {
+  font-size: 20px;
+}
+
+.load-animation {
+  &::after {
+    animation-duration: 0.7s;
+    animation-name: load;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    content: '';
+  }
+}
+
+@keyframes load {
+  0% {
+    content: '';
+  }
+
+  25% {
+    content: '.';
+  }
+
+  50% {
+    content: '..';
+  }
+
+  75% {
+    content: '...';
+  }
+
+  100% {
+    content: '....';
+  }
+}
