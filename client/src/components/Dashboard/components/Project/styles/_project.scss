@@ -1,0 +1,15 @@
+.project {
+  box-shadow: var(--headerShadow);
+  padding: 15px 10px;
+}
+
+.project__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.project__title {
+  font-size: 20px;
+  font-weight: 500;
+  width: 70%;
+}

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
 // Components
 
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import Landing from './components/Landing.jsx';
+import Landing from './components/Landing/Landing.jsx';
 import Login from './components/Forms/Login.jsx';
 import Register from './components/Forms/Register.jsx';
-import Profile from './components/Profile.jsx';
+import Profile from './components/Profile/Profile.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 
 // CSS imports
@@ -24,9 +24,9 @@ class App extends Component {
       <Router>
         <div className="app">
           <Header />
-          <Route exact path="/" component={Landing} />
           <main className="content">
             <div className="container content__container">
+              <Route exact path="/" component={Landing} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/profile" component={Profile} />

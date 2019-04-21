@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Task from './Task.jsx';
-import { getTasks, putTask } from './UserFunctions';
+import { getTasks, putTask } from '../../../UserFunctions';
 
 class Tasks extends Component {
   constructor(props) {

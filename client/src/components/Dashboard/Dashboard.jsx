@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {getProjects, putProject} from "../UserFunctions";
-import Project from './components/Project.jsx';
+import Project from './components/Project/Project.jsx';
+
+import './styles/_dashboard.scss';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,9 +23,11 @@ class Dashboard extends Component {
     const name = e.target.name;
     const value = e.target.value;
 
-    this.setState({newItem: {
+    this.setState({
+      newItem: {
         [name]: value,
-      }});
+      }
+    });
   }
 
   onSubmit = function (e) {
@@ -66,33 +70,31 @@ class Dashboard extends Component {
     const {isLoading, projects, error} = this.state;
 
     return (
-      <React.Fragment>
-        <h1>Projects:</h1>
-        {error ? <p>{error.message}</p> : null}
-        <div className="container">
-          <div className="row">
-            {!isLoading && projects !== undefined ? (
-              projects.map((projects) => {
-                return (
-                  <Project data={projects} key={projects.id}/>
-                );
-              })
-            ) : (
-              <h3>Loading...</h3>
-            )}
+      <div className="projects">
+        <h1 className="projects__title title">Projects:</h1>
+        <ul className="projects__list">
+          {error ? <p>{error.message}</p> : null}
+          {!isLoading && projects !== undefined ? (
+            projects.map((projects) => {
+              return (
+                <Project data={projects} key={projects.id}/>
+              );
+            })
+          ) : (
+            <h3>Loading...</h3>
+          )}
+        </ul>
+        <form className="form-project" onSubmit={this.onSubmit}>
+          <div className="form__group">
+            <div className="input">
+              <input type="text" className="input__field" required placeholder="Project name" name="name"
+                     onChange={this.onChange}/>
+              <label className="input__label">Project name</label>
+            </div>
           </div>
-        </div>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Project name</label>
-            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter project name" name="name" onChange={this.onChange}/>
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
-            </small>
-          </div>
-          <button type="submit" className="btn btn-primary">Add project</button>
+          <button className="btn btn-color">Add New Project</button>
         </form>
-      </React.Fragment>
+      </div>
     );
   }
 }

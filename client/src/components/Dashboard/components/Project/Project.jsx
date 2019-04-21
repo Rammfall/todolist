@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Tasks from '../../Tasks.jsx';
-import Modal from '../../ProjectModal.jsx';
-import {dropProject} from "../../UserFunctions";
+import React, {Component} from 'react';
+import Tasks from '../Task/Tasks.jsx';
+import {dropProject} from "../../../UserFunctions";
+import './styles/_project.scss';
 
 class Project extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -32,7 +32,7 @@ class Project extends Component {
     let data;
     data = item;
 
-    this.setState({ data });
+    this.setState({data});
   };
 
   replaceModalItem(index) {
@@ -42,19 +42,16 @@ class Project extends Component {
   };
 
   render() {
-    const { id, name } = this.props.data;
+    const {id, name} = this.props.data;
 
     return this.state.isAlive ? (
-      <div className=" col-md-12" data-id={id}>
-        <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <button className="btn btn-outline-secondary">Edit project</button>
+      <div className="project">
+        <div className="project__header">
+          <h2 className="project__title">{name}</h2>
+          <button className="btn">Edit project</button>
           <button className="btn btn-danger" onClick={this.clickDelete}>Delete project</button>
-          <Tasks projectId={id}/>
-          <Modal data={{name, id}}/>
         </div>
-        </div>
+        <Tasks projectId={id}/>
       </div>
     ) : null;
   }

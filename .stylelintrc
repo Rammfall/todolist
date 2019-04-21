@@ -1,5 +1,5 @@
 {
-  "syntax": "css",
+  "syntax": "scss",
   "extends": "stylelint-config-standard",
   "rules": {
 

@@ -44,8 +44,5 @@
   "eslintIgnore": [
     "node_modules",
     "client"
-  ],
-  "stylelint": {
-    "ignoreFiles": ["**/_reset.scss"]
-  }
+  ]
 }

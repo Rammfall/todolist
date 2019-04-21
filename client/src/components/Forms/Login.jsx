@@ -79,13 +79,17 @@ class Login extends Component {
       <form className="form" onSubmit={this.onSubmit}>
         <h1 className="form__title">Log in</h1>
         <p className="form__description">on ToDo list for Ruby Garage</p>
-        <div className="input" data-error="">
-          <input type="email" className="input__field" name="email" placeholder="Email" required onChange={this.onChange} />
-          <label className="input__label">Email</label>
+        <div className="form__group">
+          <div className="input" data-error="">
+            <input type="email" className="input__field" name="email" placeholder="Email" required onChange={this.onChange} />
+            <label className="input__label">Email</label>
+          </div>
         </div>
-        <div className="input">
-          <input type="password" className="input__field" name="password" placeholder="Password" required onChange={this.onChange} />
-          <label className="input__label">Password</label>
+        <div className="form__group">
+          <div className="input">
+            <input type="password" className="input__field" name="password" placeholder="Password" required onChange={this.onChange} />
+            <label className="input__label">Password</label>
+          </div>
         </div>
         <button className="btn color-btn">Log in</button>
       </form>

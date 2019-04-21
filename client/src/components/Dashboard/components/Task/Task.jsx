@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {dropTask} from './UserFunctions';
+import {dropTask} from '../../../UserFunctions';
 
 class Task extends Component {
   constructor(props) {

@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { register } from '../UserFunctions'
+import React, {Component} from 'react'
+import {register} from '../UserFunctions'
+
 // import Modal from './Modal.jsx';
 
 class Register extends Component {
@@ -16,11 +17,11 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange (e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(e) {
+    this.setState({[e.target.name]: e.target.value});
   }
 
-  onSubmit (e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const user = {
@@ -35,26 +36,34 @@ class Register extends Component {
     });
   }
 
-  render () {
+  render() {
     return (
       <form className="form">
         <h1 className="form__title">Sign in</h1>
         <p className="form__description">on ToDo list for Ruby Garage</p>
-        <div className="input" data-error="">
-          <input type="text" className="input__field" placeholder="First name" required/>
-          <label className="input__label">First name</label>
+        <div className="form__group">
+          <div className="input" data-error="">
+            <input type="text" className="input__field" placeholder="First name" required/>
+            <label className="input__label">First name</label>
+          </div>
         </div>
-        <div className="input" data-error="">
-          <input type="text" className="input__field" placeholder="Last name" required/>
-          <label className="input__label">Last name</label>
+        <div className="form__group">
+          <div className="input" data-error="">
+            <input type="text" className="input__field" placeholder="Last name" required/>
+            <label className="input__label">Last name</label>
+          </div>
         </div>
-        <div className="input" data-error="">
-          <input type="email" className="input__field" placeholder="Email" required/>
+        <div className="form__group">
+          <div className="input" data-error="">
+            <input type="email" className="input__field" placeholder="Email" required/>
             <label className="input__label">Email</label>
+          </div>
         </div>
-        <div className="input">
-          <input type="password" className="input__field" placeholder="Password" required/>
+        <div className="form__group">
+          <div className="input">
+            <input type="password" className="input__field" placeholder="Password" required/>
             <label className="input__label">Password</label>
+          </div>
         </div>
         <button className="btn color-btn">Sign in</button>
       </form>
@@ -62,4 +71,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default Register;

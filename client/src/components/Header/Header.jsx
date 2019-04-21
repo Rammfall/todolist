@@ -1,9 +1,67 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, Route } from 'react-router-dom'
 
 import './styles/_header.scss';
 
+function HeaderLink({label, to, exact}) {
+  return (
+    <Route
+      path={to}
+      exact={exact}
+      children={({match}) => {
+        return (
+          <li className="nav__item">
+            <Link to={to} className={match ? 'nav__link entered' : 'nav__link'}>{label}</Link>
+          </li>
+        );
+      }}
+    />
+  );
+}
+
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.setState({
+      logLinks: [
+        {
+          to: '/',
+          title: 'Home',
+          exact: true,
+        },
+        {
+          to: '/login/',
+          title: 'Login',
+          exact: false,
+        },
+        {
+          to: '/register/',
+          title: 'Register',
+          exact: false,
+        },
+      ],
+      regLinks: [
+        {
+          to: '/',
+          title: 'Home',
+          exact: true,
+        },
+        {
+          to: '/dashboard/',
+          title: 'Dashboard',
+          exact: false,
+        },
+        {
+          to: '/profile/',
+          title: 'Profile',
+          exact: false,
+        },
+      ]
+    });
+  }
+
+
   logOut(e) {
     e.preventDefault();
     localStorage.removeItem('usertoken');
@@ -13,9 +71,11 @@ class Header extends Component {
   render() {
     const loginRegLink = (
       <React.Fragment>
-        <li className="nav__item">
-          <Link to="/login" className="nav__link">Login</Link>
-        </li>
+        <Route exact={false} children={({ match }) => (
+          <li className="nav__item">{console.log(match)}
+            <Link to="/login" className={ match ? "nav__link entered" : "nav__link"}>Login</Link>
+          </li>
+          )}/>
         <li className="nav__item">
           <Link to="/register" className="nav__link">Registration</Link>
         </li>
@@ -41,7 +101,9 @@ class Header extends Component {
           <a href="/" className="logo">React ToDo List</a>
           <nav className="nav">
             <ul className="nav__list">
-              <li className="nav__item"><a href="/" className="nav__link">Home</a></li>
+              <li className="nav__item">
+                <Link to="/" className="nav__link">Home</Link>
+              </li>
               {localStorage.usertoken ? userLink : loginRegLink}
             </ul>
           </nav>
