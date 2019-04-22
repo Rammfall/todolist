@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { dropTask, editTask, putTask } from './../../functions/connectDB';
+import { dropTask, editTask } from './../../functions/connectDB';
 import FormValidator from '../../../../functions/formValidator';
 
 class Task extends Component {
@@ -45,8 +45,6 @@ class Task extends Component {
       validation: this.validator.valid(),
     };
 
-    console.log(this.state);
-
     this.submitted = false;
     this.clickDelete = this.clickDelete.bind(this);
   }
@@ -71,7 +69,6 @@ class Task extends Component {
     event.preventDefault();
 
     let {name, deadline} = this.state;
-    console.log(this.state);
 
     const validation = this.validator.validate(this.state);
     this.setState({validation});
@@ -82,15 +79,8 @@ class Task extends Component {
         name,
         deadline,
         id: `${this.state.id}`,
-        status: `${this.state.status ? 0: 1}`,
       })
         .then((res) => {
-          let date = new Date(res.info.deadline).toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-          });
-
           this.setState({
             visibleEditModal: !this.state.visibleEditModal,
           });
@@ -114,6 +104,27 @@ class Task extends Component {
     }
   };
 
+  checkboxClick = (event) => {
+    event.preventDefault();
+
+    let { name, deadline, status} = this.state;
+
+    status = +status !== +'0' ? '0' : '1';
+
+    editTask({
+      name,
+      deadline,
+      id: `${this.state.id}`,
+      status: status,
+    })
+      .then((res) => {
+        this.setState({
+          status: status,
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
   render() {
     const {name, deadline} = this.state;
     let validation = this.submitted ?
@@ -123,7 +134,11 @@ class Task extends Component {
     return (
       this.state.isAlive ? (
       <li className="task">
-        <h4 className="task__title">{name}</h4>
+        <label className="checkbox-container">
+          <input type="checkbox" checked={+this.state.status !== +'0' ? 'checked' : ''} onChange={this.checkboxClick} />
+            <span className="checkmark"></span>
+        </label>
+        <h4 className={+this.state.status !== +'0' ? 'task__title through' : 'task__title'}>{name}</h4>
         <div className="task__date">{deadline}</div>
         <button className="btn btn-color" onClick={this.handlerEdit}>Edit task</button>
         <button className="btn btn-danger" onClick={this.clickDelete}>Delete task</button>
