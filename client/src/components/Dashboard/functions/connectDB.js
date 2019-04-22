@@ -2,8 +2,9 @@ import axios from 'axios';
 
 const authFail = (error) => {
   if (error.data.message === 'Auth failed') {
-    alert(error.data.message);
-    delete localStorage.usertoken;
+    // alert(error.data.message);
+    // delete localStorage.usertoken;
+    console.log('Auth fail');
   }
 };
 

@@ -42,6 +42,10 @@ class Login extends Component {
     ]);
 
     this.state = {
+      error: {
+        info: '',
+        visible: false,
+      },
       email: '',
       password: '',
       validation: this.validator.valid(),
@@ -76,12 +80,34 @@ class Login extends Component {
             this.props.history.push(`/dashboard`);
             window.location.reload();
           } else {
-            alert(res.info);
+            this.setState({
+              error: {
+                visible: true,
+                info: res.info,
+              },
+            });
+            setTimeout(() => {
+              this.setState({
+                error: {
+                  visible: false,
+                },
+              });
+            }, 3000);
           }
         })
         .catch((error) => {
           console.log(error);
         });
+    }
+  };
+
+  handlerCloseModal = (event) => {
+    if (event.target.classList.contains('modal')) {
+      this.setState({
+        error: {
+          visible: false,
+        },
+      })
     }
   };
 
@@ -102,13 +128,20 @@ class Login extends Component {
           </div>
         </div>
         <div className="form__group">
-          <div className={validation.password.isInvalid ? 'input error' : 'input'} data-error={validation.password.message}>
+          <div className={validation.password.isInvalid ? 'input error' : 'input'}
+               data-error={validation.password.message}>
             <input type="password" className="input__field" name="password" placeholder="Password" required
                    onChange={this.handleInput}/>
             <label className="input__label">Password</label>
           </div>
         </div>
         <button className="btn color-btn">Log in</button>
+        {this.state.error.visible ? (
+          <div className="modal" onClick={this.handlerCloseModal}>
+            <div className="modal__container">
+              <div className="modal__title">{this.state.error.info}</div>
+            </div>
+          </div>) : null}
       </form>
     )
   }
