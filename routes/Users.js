@@ -31,18 +31,21 @@ users.post('/register', validator, (req, res) => {
           userData.password = hash;
           User.create(userData)
             .then((userResult) => {
-              res.json({ status: `${userResult.email} registered` });
+              const token = jwt.sign(userResult.dataValues, process.env.SECRET_KEY, {
+                expiresIn: '24h',
+              });
+              res.json({ status: 'success', info: `${userResult.email} registered`, token });
             })
             .catch((error) => {
-              res.send(`Error ${error}`);
+              res.send({ status: 'error', info: `Error ${error}` });
             });
         });
       } else {
-        res.json({ error: 'User already exist' });
+        res.json({ status: 'error', info: 'User already exist' });
       }
     })
     .catch((err) => {
-      res.send(`Error ${err}`);
+      res.send({ status: 'error', info: `Error ${err}` });
     });
 });
 

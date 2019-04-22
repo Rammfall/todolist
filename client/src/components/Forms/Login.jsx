@@ -1,90 +1,109 @@
 import React, {Component} from 'react';
-import {login} from '../UserFunctions';
+import {login} from '../../functions/UserFunctions';
+import FormValidator from './../../functions/formValidator';
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.validator = new FormValidator([
+      {
+        field: 'email',
+        method: 'isEmpty',
+        validWhen: false,
+        message: 'Email is required',
+      },
+      {
+        field: 'email',
+        method: 'isEmail',
+        validWhen: true,
+        message: 'That is not valid email',
+      },
+      {
+        field: 'password',
+        method: 'isEmpty',
+        validWhen: false,
+        message: 'Password is required',
+      },
+      {
+        field: 'password',
+        method: 'isByteLength',
+        args: [{min: 4}],
+        validWhen: true,
+        message: 'In password minimum 4 symbols',
+      },
+      {
+        field: 'password',
+        method: 'isByteLength',
+        args: [{max: 60}],
+        validWhen: true,
+        message: 'In password maximum 60 symbols',
+      },
+    ]);
+
     this.state = {
       email: '',
       password: '',
-      formErrors: {email: '', password: ''},
-      emailValid: false,
-      passwordValid: false,
-      formValid: false,
+      validation: this.validator.valid(),
     };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.submitted = false;
   }
 
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
-    let passwordValid = this.state.passwordValid;
+  handleInput = (event) => {
+    event.preventDefault();
 
-    switch (fieldName) {
-      case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-        break;
-      case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '' : ' is too short';
-        break;
-      default:
-        break;
-    }
     this.setState({
-      formErrors: fieldValidationErrors,
-      emailValid: emailValid,
-      passwordValid: passwordValid
-    }, this.validateForm);
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
-  }
+  handleSubmit = (event) => {
+    event.preventDefault();
 
-  onChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({[name]: value},
-      () => {
-        this.validateField(name, value)
-      })
-  }
+    let {email, password} = this.state;
 
-  onSubmit(e) {
-    e.preventDefault();
 
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    const validation = this.validator.validate(this.state);
+    this.setState({validation});
+    this.submitted = true;
 
-    login(user).then(res => {
-      console.log(res);
-      if (res.status !== 'error') {
-        localStorage.usertoken = res.token;
-        this.props.history.push(`/profile`)
-      }
-    })
-  }
+    if (validation.isValid) {
+      login({email, password})
+        .then(res => {
+          if (res.status === 'success') {
+            localStorage.usertoken = res.token;
+            this.props.history.push(`/dashboard`)
+          } else {
+            alert(res.info);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   render() {
+    let validation = this.submitted ?
+      this.validator.validate(this.state) :
+      this.state.validation;
+
     return (
-      <form className="form" onSubmit={this.onSubmit}>
+      <form className="form" noValidate onSubmit={this.handleSubmit}>
         <h1 className="form__title">Log in</h1>
         <p className="form__description">on ToDo list for Ruby Garage</p>
         <div className="form__group">
-          <div className="input" data-error="">
-            <input type="email" className="input__field" name="email" placeholder="Email" required onChange={this.onChange} />
+          <div className={validation.email.isInvalid ? 'input error' : 'input'} data-error={validation.email.message}>
+            <input type="email" className="input__field" name="email" placeholder="Email" required
+                   onInput={this.handleInput}/>
             <label className="input__label">Email</label>
           </div>
         </div>
         <div className="form__group">
-          <div className="input">
-            <input type="password" className="input__field" name="password" placeholder="Password" required onChange={this.onChange} />
+          <div className={validation.password.isInvalid ? 'input error' : 'input'} data-error={validation.password.message}>
+            <input type="password" className="input__field" name="password" placeholder="Password" required
+                   onChange={this.handleInput}/>
             <label className="input__label">Password</label>
           </div>
         </div>

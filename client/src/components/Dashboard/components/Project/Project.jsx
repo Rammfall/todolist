@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tasks from '../Task/Tasks.jsx';
-import {dropProject} from "../../../UserFunctions";
+import {dropProject} from "../../../../functions/UserFunctions";
 
 import './styles/_project.scss';
 

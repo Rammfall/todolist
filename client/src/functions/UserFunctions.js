@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios/index';
 
 const authFail = (error) => {
   if (error.data.message === 'Auth failed') {
@@ -18,7 +18,7 @@ export const register = newUser => {
       password: newUser.password
     })
     .then(res => {
-      console.log("Registered")
+      return res.data;
     });
 };
 
@@ -40,7 +40,7 @@ export const login = user => {
 const instance = axios.create({
   timeout: 2000,
   headers: {
-    'Authorization': localStorage.usertoken ? `2 ${localStorage.usertoken}` : ' Token is not get',
+    'Authorization': localStorage.usertoken ? `sdSfapodIF ${localStorage.usertoken}` : ' Token is not get',
   }
 });
 
