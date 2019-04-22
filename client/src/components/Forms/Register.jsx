@@ -120,6 +120,7 @@ class Register extends Component {
           if (res.status === 'success') {
             localStorage.usertoken = res.token;
             this.props.history.push(`/dashboard`);
+            window.location.reload();
           } else {
             alert(res.info);
           }

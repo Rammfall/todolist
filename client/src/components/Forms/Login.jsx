@@ -73,7 +73,8 @@ class Login extends Component {
         .then(res => {
           if (res.status === 'success') {
             localStorage.usertoken = res.token;
-            this.props.history.push(`/dashboard`)
+            this.props.history.push(`/dashboard`);
+            window.location.reload();
           } else {
             alert(res.info);
           }

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {getProjects, putProject} from "../../functions/UserFunctions";
+import React, { Component } from 'react';
+import { getProjects, putProject } from './functions/connectDB';
 import Project from './components/Project/Project.jsx';
 
 import './styles/_dashboard.scss';
-import FormValidator from "../../functions/formValidator";
+import FormValidator from '../../functions/formValidator';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -19,14 +19,14 @@ class Dashboard extends Component {
       {
         field: 'name',
         method: 'isByteLength',
-        args: [{min: 4}],
+        args: [{ min: 4 }],
         validWhen: true,
         message: 'Name project should have minimum 4 symbols',
       },
       {
         field: 'name',
         method: 'isByteLength',
-        args: [{max: 30}],
+        args: [{ max: 30 }],
         validWhen: true,
         message: 'Name project should have maximum 30 symbols',
       },
@@ -54,17 +54,20 @@ class Dashboard extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    let {name} = this.state;
+    let { name } = this.state;
 
     const validation = this.validator.validate(this.state);
-    this.setState({validation});
+    this.setState({ validation });
     this.submitted = true;
 
     if (validation.isValid) {
-      putProject({name})
+      putProject({ name })
         .then((res) => {
           const projects = this.state.projects || [];
-          projects.push({name: res.name, id: res.id});
+          projects.push({
+            name: res.name,
+            id: res.id
+          });
 
           this.setState({
             projects: projects,
@@ -90,12 +93,16 @@ class Dashboard extends Component {
       });
   }
 
+  update = (id) => {
+
+  };
+
   componentDidMount() {
     this.fetchProjects();
   }
 
   render() {
-    const {isLoading, projects, error} = this.state;
+    const { isLoading, projects, error } = this.state;
     let validation = this.submitted ?
       this.validator.validate(this.state) :
       this.state.validation;
@@ -108,7 +115,7 @@ class Dashboard extends Component {
           {!isLoading && projects !== undefined ? (
             projects.map((projects) => {
               return (
-                <Project data={projects} key={projects.id}/>
+                <Project data={projects} key={projects.id} callback={this.update}/>
               );
             })
           ) : (
@@ -117,8 +124,10 @@ class Dashboard extends Component {
         </ul>
         <form className="form-project" noValidate onSubmit={this.handleSubmit}>
           <div className="form__group">
-            <div className={validation.name.isInvalid ? 'input error' : 'input'} data-error={validation.name.message}>
-              <input type="text" className="input__field" required placeholder="Project name" name="name"
+            <div className={validation.name.isInvalid ? 'input error' : 'input'}
+                 data-error={validation.name.message}>
+              <input type="text" className="input__field" required placeholder="Project name"
+                     name="name"
                      onInput={this.handleInput}/>
               <label className="input__label">Project name</label>
             </div>

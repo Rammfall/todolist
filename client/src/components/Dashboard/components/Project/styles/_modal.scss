@@ -1,0 +1,33 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 6;
+}
+
+.modal__container {
+  background-color: #fff;
+  left: 50%;
+  margin: auto;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 7;
+}
+
+.modal__title {
+  margin-bottom: 20px;
+}
+
+.modal__color {
+  color: var(--accentColor);
+}
+
+.modal__input {
+  margin-bottom: 20px;
+}

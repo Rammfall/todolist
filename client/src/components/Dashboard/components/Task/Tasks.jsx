@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Task from './Task.jsx';
-import {getTasks, putTask} from '../../../../functions/UserFunctions';
+import {getTasks, putTask} from './../../functions/connectDB';
 import './styles/_tasks.scss';
 import FormValidator from './../../../../functions/formValidator';
 
