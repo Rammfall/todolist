@@ -73,7 +73,7 @@ class Header extends Component {
       <React.Fragment>
         <Route exact={false} children={({ match }) => (
           <li className="nav__item">{console.log(match)}
-            <Link to="/login" className={ match ? "nav__link entered" : "nav__link"}>Login</Link>
+            <Link to="/login" className={ match ? "nav__link" : "nav__link"}>Login</Link>
           </li>
           )}/>
         <li className="nav__item">
