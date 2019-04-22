@@ -87,6 +87,10 @@ class Register extends Component {
       email: '',
       password: '',
       validation: this.validator.valid(),
+      error: {
+        info: '',
+        visible: false,
+      },
     };
 
     this.submitted = false;
@@ -122,12 +126,34 @@ class Register extends Component {
             this.props.history.push(`/dashboard`);
             window.location.reload();
           } else {
-            alert(res.info);
+            this.setState({
+              error: {
+                visible: true,
+                info: res.info,
+              },
+            });
+            setTimeout(() => {
+              this.setState({
+                error: {
+                  visible: false,
+                },
+              });
+            }, 3000);
           }
         })
         .catch((error) => {
           console.log(error);
         });
+    }
+  };
+
+  handlerCloseModal = (event) => {
+    if (event.target.classList.contains('modal')) {
+      this.setState({
+        error: {
+          visible: false,
+        },
+      })
     }
   };
 
@@ -172,6 +198,12 @@ class Register extends Component {
           </div>
         </div>
         <button className="btn color-btn">Sign in</button>
+        {this.state.error.visible ? (
+          <div className="modal" onClick={this.handlerCloseModal}>
+            <div className="modal__container">
+              <div className="modal__title">{this.state.error.info}</div>
+            </div>
+          </div>) : null}
       </form>
     )
   }
