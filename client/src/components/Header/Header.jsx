@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Link, withRouter, Route } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link, withRouter, Route} from 'react-router-dom'
 
 import './styles/_header.scss';
 
@@ -71,11 +71,9 @@ class Header extends Component {
   render() {
     const loginRegLink = (
       <React.Fragment>
-        <Route exact={false} children={({ match }) => (
-          <li className="nav__item">{console.log(match)}
-            <Link to="/login" className={ match ? "nav__link" : "nav__link"}>Login</Link>
-          </li>
-          )}/>
+        <li className="nav__item">
+          <Link to="/login" className="nav__link">Login</Link>
+        </li>
         <li className="nav__item">
           <Link to="/register" className="nav__link">Registration</Link>
         </li>

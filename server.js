@@ -17,7 +17,7 @@ const Tasks = require('./routes/Tasks');
 
 // Render static files
 
-router.get('/', (req, res) => {
+router.get('/*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/client/build/index.html`));
 });
 
